@@ -43,7 +43,7 @@ function calculateNetSalary(basicSalary, benefits) {
       (taxableIncome - 800000) * 0.35;
   }
 
-  // Apply personal relief of KES 2400/month
+  //personal relief of KES 2400/month
   const personalRelief = 2400;
   paye -= personalRelief;
   if (paye < 0) paye = 0;
@@ -66,7 +66,6 @@ function calculateNetSalary(basicSalary, benefits) {
   };
 }
 
-// Example usage:
 const result = calculateNetSalary(120000, 10000);
 console.log("==== Net Salary Breakdown ====");
 console.log(`Gross Salary: KES ${result.grossSalary}`);
