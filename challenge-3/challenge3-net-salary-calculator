@@ -1,0 +1,78 @@
+function calculateNetSalary(basicSalary, benefits) {
+  const grossSalary = basicSalary + benefits;
+
+  // SHIF: 2.75% of gross salary
+  const shif = grossSalary * 0.0275;
+
+  // NSSF: 6% employee contribution
+  let nssf = 0;
+  if (grossSalary <= 8000) {
+    nssf = grossSalary * 0.06;
+  } else if (grossSalary <= 72000) {
+    nssf = 8000 * 0.06 + (grossSalary - 8000) * 0.06;
+  } else {
+    nssf = 8000 * 0.06 + (72000 - 8000) * 0.06;
+  }
+
+  // Housing Levy: 1.5% of gross salary
+  const housingLevy = grossSalary * 0.015;
+
+  // Taxable Income
+  const taxableIncome = grossSalary - (shif + nssf + housingLevy);
+
+  // PAYE calculation
+  let paye = 0;
+  if (taxableIncome <= 24000) {
+    paye = taxableIncome * 0.1;
+  } else if (taxableIncome <= 32333) {
+    paye = 24000 * 0.1 + (taxableIncome - 24000) * 0.25;
+  } else if (taxableIncome <= 500000) {
+    paye = 24000 * 0.1 + 8333 * 0.25 + (taxableIncome - 32333) * 0.3;
+  } else if (taxableIncome <= 800000) {
+    paye =
+      24000 * 0.1 +
+      8333 * 0.25 +
+      467667 * 0.3 +
+      (taxableIncome - 500000) * 0.325;
+  } else {
+    paye =
+      24000 * 0.1 +
+      8333 * 0.25 +
+      467667 * 0.3 +
+      300000 * 0.325 +
+      (taxableIncome - 800000) * 0.35;
+  }
+
+  // Apply personal relief of KES 2400/month
+  const personalRelief = 2400;
+  paye -= personalRelief;
+  if (paye < 0) paye = 0;
+
+  // Total deductions
+  const totalDeductions = shif + nssf + housingLevy + paye;
+
+  // Net salary
+  const netSalary = grossSalary - totalDeductions;
+
+  // Return results
+  return {
+    grossSalary: grossSalary.toFixed(2),
+    shif: shif.toFixed(2),
+    nssf: nssf.toFixed(2),
+    housingLevy: housingLevy.toFixed(2),
+    paye: paye.toFixed(2),
+    totalDeductions: totalDeductions.toFixed(2),
+    netSalary: netSalary.toFixed(2),
+  };
+}
+
+// Example usage:
+const result = calculateNetSalary(120000, 10000);
+console.log("==== Net Salary Breakdown ====");
+console.log(`Gross Salary: KES ${result.grossSalary}`);
+console.log(`SHIF Deduction: KES ${result.shif}`);
+console.log(`NSSF Deduction: KES ${result.nssf}`);
+console.log(`Housing Levy: KES ${result.housingLevy}`);
+console.log(`PAYE: KES ${result.paye}`);
+console.log(`Total Deductions: KES ${result.totalDeductions}`);
+console.log(`Net Salary: KES ${result.netSalary}`);
