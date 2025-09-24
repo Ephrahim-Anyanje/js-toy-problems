@@ -56,13 +56,12 @@ function calculateNetSalary(basicSalary, benefits) {
 
   // Return results
   return {
-    grossSalary: grossSalary.toFixed(2),
-    shif: shif.toFixed(2),
-    nssf: nssf.toFixed(2),
-    housingLevy: housingLevy.toFixed(2),
-    paye: paye.toFixed(2),
-    totalDeductions: totalDeductions.toFixed(2),
-    netSalary: netSalary.toFixed(2),
+    grossSalary: grossSalary.
+    shif: shif.,
+    housingLevy: housingLevy
+    paye: paye.
+    totalDeductions: totalDeductions.
+    netSalary: netSalary.
   };
 }
 
